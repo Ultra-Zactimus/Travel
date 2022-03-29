@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency.Models;
 using System.Linq;
+using Dapper;
+using Azure;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace TravelAgency.Controllers
 {
@@ -17,6 +21,28 @@ namespace TravelAgency.Controllers
     {
       _db = db;
     }
+
+    // [HttpGet]
+    // public IActionResult GetReviews([FromQuery] UrlQuery urlQuery)
+    // {
+    //   IEnumerable<Review> reviews = null;
+
+    //   using (SqlConnection connection = new SqlConnection())
+    //   {
+    //     connection.Open();
+
+    //     string sql = @"SELECT ReviewId, Text, Rating, UserId, DestinationId FROM Reviews";
+
+    //     if (urlQuery.PageNumber.HasValue)
+    //     {
+    //       sql += @" ORDER BY Review.ReviewPk OFFSET @PageSize * (@PageNumber - 1) ROWS FETCH NEXT @PageSize ROWS ONLY";
+    //     }
+
+    //     reviews = connection.Query<Review>(sql, urlQuery);
+    //   }
+
+    //   return Ok(reviews);
+    // }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Review>>> Get(string text, int rating, string name, string city, string country)
