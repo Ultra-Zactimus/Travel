@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace TravelAgency
 {
@@ -12,6 +13,7 @@ namespace TravelAgency
     [Required] 
     public string Text {get;set;}
     public int DestinationId { get; set; }
+    [JsonIgnore]
     public virtual Destination Destination { get; set; }
   }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace TravelAgency.Controllers
 {
-  [Route("api/Travels")]
+  [Route("api/Travels/Destinations")]
   [ApiController]
   public class DestinationsController : ControllerBase
   {
@@ -19,9 +19,12 @@ namespace TravelAgency.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Destination>>> Get(string country, string city, string review, int rating)
+    public async Task<ActionResult<IEnumerable<Destination>>> Get(string country, string city)
     {
-      var query = _db.Destinations.AsQueryable();
+      // var query = _db.Destinations.AsQueryable();
+      var query = _db.Destinations
+        .Include(a => a.Reviews)
+        .AsQueryable();
 
       if (country != null)
       {
@@ -32,17 +35,6 @@ namespace TravelAgency.Controllers
       {
         query = query.Where(entry => entry.City == city);
       }
-
-    //   if (review != null)
-    //   {
-    //     query = query.Where(entry => entry.Review == review);
-    //   }
-
-    //   if (rating != 0)
-    //   {
-    //     query = query.Where(entry => entry.Rating == rating);
-    //   }
-
       return await query.ToListAsync();
     }
 
@@ -93,7 +85,6 @@ namespace TravelAgency.Controllers
           throw;
         }
       }
-
       return NoContent();
     }
     private bool DestinationExists(int id)

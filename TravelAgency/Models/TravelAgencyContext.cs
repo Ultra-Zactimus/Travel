@@ -10,15 +10,23 @@ namespace TravelAgency.Models
         }
 
         public DbSet<Destination> Destinations { get; set; }
-
+        public DbSet<Review> Reviews { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Review>()
+                .HasData
+                (
+                    new Review { ReviewId = 1, User = "Bob", Rating = 6, Text = "Yolo", DestinationId = 1 },
+                    new Review { ReviewId = 2, User = "Charlie", Rating = 2, Text = "It's windy", DestinationId = 1 },
+                    new Review { ReviewId = 3, User = "Dakota", Rating = 6, Text = "go there", DestinationId = 2 },
+                    new Review { ReviewId = 4, User = "Bob", Rating = 6, Text = "Yolo", DestinationId = 2 },
+                    new Review { ReviewId = 5, User = "Sam", Rating = 6, Text = "Yolo", DestinationId = 2 }
+                );
             builder.Entity<Destination>()
                 .HasData
                 (
-                    // new Destination { DestinationId = 3, City = "Tokyo", Country = "Japan", Review = "It was amazing. Definitely go there!", Rating = 5 },
-                    new Destination { DestinationId = 3, City = "Tokyo", Country = "Japan", [ new Review { ReviewId = 1, User = "name", Rating = 5, Text = "It was amazing. Definitely go there!" }, new Review { ReviewId = 2, User = "name", Rating = 5, Text = "It was amazing. Definitely go there!", Destination.DestinationId = 3 }] }
-                    // new Destination { DestinationId = 4, City = "Venice", Country = "Italy", Review = "The food? The Bomb Dot Com", Rating = 5 }
+                    new Destination { DestinationId = 1, City = "Tokyo", Country = "Japan" },
+                    new Destination { DestinationId = 2, City = "Chicago", Country = "USA" }
                 );
         }
     }
