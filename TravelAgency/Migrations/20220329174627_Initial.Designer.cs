@@ -8,8 +8,8 @@ using TravelAgency.Models;
 namespace TravelAgency.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    [Migration("20220328230336_ThisIsATest")]
-    partial class ThisIsATest
+    [Migration("20220329174627_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,13 +67,14 @@ namespace TravelAgency.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("User")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("ReviewId");
 
                     b.HasIndex("DestinationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
 
@@ -82,9 +83,9 @@ namespace TravelAgency.Migrations
                         {
                             ReviewId = 1,
                             DestinationId = 1,
-                            Rating = 6,
+                            Rating = 1,
                             Text = "Yolo",
-                            User = "Bob"
+                            UserId = 1
                         },
                         new
                         {
@@ -92,31 +93,55 @@ namespace TravelAgency.Migrations
                             DestinationId = 1,
                             Rating = 2,
                             Text = "It's windy",
-                            User = "Charlie"
+                            UserId = 1
                         },
                         new
                         {
                             ReviewId = 3,
                             DestinationId = 2,
-                            Rating = 6,
-                            Text = "go there",
-                            User = "Dakota"
+                            Rating = 5,
+                            Text = "Yolo",
+                            UserId = 2
                         },
                         new
                         {
                             ReviewId = 4,
                             DestinationId = 2,
-                            Rating = 6,
+                            Rating = 4,
                             Text = "Yolo",
-                            User = "Bob"
+                            UserId = 2
+                        });
+                });
+
+            modelBuilder.Entity("TravelAgency.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("ReviewId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Name = "Bob",
+                            ReviewId = 0
                         },
                         new
                         {
-                            ReviewId = 5,
-                            DestinationId = 2,
-                            Rating = 6,
-                            Text = "Yolo",
-                            User = "Sam"
+                            UserId = 2,
+                            Name = "Mary",
+                            ReviewId = 0
                         });
                 });
 
@@ -128,10 +153,23 @@ namespace TravelAgency.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TravelAgency.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Destination");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TravelAgency.Destination", b =>
+                {
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("TravelAgency.User", b =>
                 {
                     b.Navigation("Reviews");
                 });

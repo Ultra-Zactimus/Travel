@@ -18,23 +18,33 @@ namespace TravelAgency.Controllers
       _db = db;
     }
 
-        [HttpGet]
-    public async Task<ActionResult<IEnumerable<Review>>> Get(string text, string user, int rating)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Review>>> Get(string text, int rating, string name, string city, string country)
     {
-      var query = _db.Reviews.AsQueryable();
+      var query = _db.Reviews   // You need this to be able to display json data for that field
+        .Include(a => a.User)
+        .Include(b => b.Destination)
+        .AsQueryable();
 
       if (text != null)
       {
         query = query.Where(entry => entry.Text == text);
       }
-
-      if (user != null)
-      {
-        query = query.Where(entry => entry.User == user);
-      }
       if (rating != 0)
       {
         query = query.Where(entry => entry.Rating == rating);
+      }
+      if (name != null)
+      {
+        query = query.Where(a => a.User.Name == name);
+      }
+      if (city != null)
+      {
+        query = query.Where(a => a.Destination.City == city);
+      }
+      if (country != null)
+      {
+        query = query.Where(a => a.Destination.Country == country);
       }
       return await query.ToListAsync();
     }

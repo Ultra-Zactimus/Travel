@@ -2,7 +2,7 @@
 
 namespace TravelAgency.Migrations
 {
-    public partial class Second : Migration
+    public partial class Secondary : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -21,8 +21,7 @@ namespace TravelAgency.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Destination>>> Get(string country, string city)
     {
-      // var query = _db.Destinations.AsQueryable();
-      var query = _db.Destinations
+      var query = _db.Destinations    // You need this to be able to display json data for that field
         .Include(a => a.Reviews)
         .AsQueryable();
 

@@ -10,17 +10,23 @@ namespace TravelAgency.Models
         }
 
         public DbSet<Destination> Destinations { get; set; }
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Review> Reviews { get; set; }        
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<User>()
+                .HasData
+                (
+                    new User { UserId = 1, Name = "Bob" },
+                    new User { UserId = 2, Name = "Mary" }
+                );
             builder.Entity<Review>()
                 .HasData
                 (
-                    new Review { ReviewId = 1, User = "Bob", Rating = 6, Text = "Yolo", DestinationId = 1 },
-                    new Review { ReviewId = 2, User = "Charlie", Rating = 2, Text = "It's windy", DestinationId = 1 },
-                    new Review { ReviewId = 3, User = "Dakota", Rating = 6, Text = "go there", DestinationId = 2 },
-                    new Review { ReviewId = 4, User = "Bob", Rating = 6, Text = "Yolo", DestinationId = 2 },
-                    new Review { ReviewId = 5, User = "Sam", Rating = 6, Text = "Yolo", DestinationId = 2 }
+                    new Review { ReviewId = 1, Rating = 1, Text = "Yolo", DestinationId = 1, UserId = 1 },
+                    new Review { ReviewId = 2, Rating = 2, Text = "It's windy", UserId = 1, DestinationId = 1 },
+                    new Review { ReviewId = 3, Rating = 5, Text = "Yolo", UserId = 2, DestinationId = 2 },
+                    new Review { ReviewId = 4, Rating = 4, Text = "Yolo", UserId = 2, DestinationId = 2 }
                 );
             builder.Entity<Destination>()
                 .HasData
