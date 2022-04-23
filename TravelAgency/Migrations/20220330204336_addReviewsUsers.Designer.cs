@@ -8,8 +8,8 @@ using TravelAgency.Models;
 namespace TravelAgency.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    [Migration("20220329174627_Initial")]
-    partial class Initial
+    [Migration("20220330204336_addReviewsUsers")]
+    partial class addReviewsUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,24 @@ namespace TravelAgency.Migrations
                             DestinationId = 2,
                             City = "Chicago",
                             Country = "USA"
+                        },
+                        new
+                        {
+                            DestinationId = 3,
+                            City = "London",
+                            Country = "England"
+                        },
+                        new
+                        {
+                            DestinationId = 4,
+                            City = "Los Angelos",
+                            Country = "Usa"
+                        },
+                        new
+                        {
+                            DestinationId = 5,
+                            City = "Sydney",
+                            Country = "Australia"
                         });
                 });
 
@@ -83,16 +101,16 @@ namespace TravelAgency.Migrations
                         {
                             ReviewId = 1,
                             DestinationId = 1,
-                            Rating = 1,
+                            Rating = 5,
                             Text = "Yolo",
                             UserId = 1
                         },
                         new
                         {
                             ReviewId = 2,
-                            DestinationId = 1,
-                            Rating = 2,
-                            Text = "It's windy",
+                            DestinationId = 2,
+                            Rating = 3,
+                            Text = "Awesome",
                             UserId = 1
                         },
                         new
@@ -100,16 +118,104 @@ namespace TravelAgency.Migrations
                             ReviewId = 3,
                             DestinationId = 2,
                             Rating = 5,
-                            Text = "Yolo",
+                            Text = "Cool",
                             UserId = 2
                         },
                         new
                         {
                             ReviewId = 4,
-                            DestinationId = 2,
-                            Rating = 4,
-                            Text = "Yolo",
+                            DestinationId = 3,
+                            Rating = 1,
+                            Text = "Bad",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            ReviewId = 5,
+                            DestinationId = 3,
+                            Rating = 3,
+                            Text = "Eh",
                             UserId = 2
+                        },
+                        new
+                        {
+                            ReviewId = 6,
+                            DestinationId = 3,
+                            Rating = 1,
+                            Text = "Word",
+                            UserId = 3
+                        },
+                        new
+                        {
+                            ReviewId = 7,
+                            DestinationId = 4,
+                            Rating = 4,
+                            Text = "Radical",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            ReviewId = 8,
+                            DestinationId = 4,
+                            Rating = 4,
+                            Text = "Cawabunga",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            ReviewId = 9,
+                            DestinationId = 4,
+                            Rating = 5,
+                            Text = "Go there!",
+                            UserId = 3
+                        },
+                        new
+                        {
+                            ReviewId = 10,
+                            DestinationId = 4,
+                            Rating = 5,
+                            Text = "Do eet!",
+                            UserId = 4
+                        },
+                        new
+                        {
+                            ReviewId = 11,
+                            DestinationId = 5,
+                            Rating = 4,
+                            Text = "Rad",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            ReviewId = 12,
+                            DestinationId = 5,
+                            Rating = 5,
+                            Text = "Nice",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            ReviewId = 13,
+                            DestinationId = 5,
+                            Rating = 4,
+                            Text = "Da Bomb",
+                            UserId = 3
+                        },
+                        new
+                        {
+                            ReviewId = 14,
+                            DestinationId = 5,
+                            Rating = 5,
+                            Text = "Cool",
+                            UserId = 4
+                        },
+                        new
+                        {
+                            ReviewId = 15,
+                            DestinationId = 5,
+                            Rating = 5,
+                            Text = "Cool",
+                            UserId = 5
                         });
                 });
 
@@ -141,6 +247,24 @@ namespace TravelAgency.Migrations
                         {
                             UserId = 2,
                             Name = "Mary",
+                            ReviewId = 0
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            Name = "Dakota",
+                            ReviewId = 0
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            Name = "Riley",
+                            ReviewId = 0
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            Name = "Sam",
                             ReviewId = 0
                         });
                 });

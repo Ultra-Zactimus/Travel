@@ -8,8 +8,8 @@ using TravelAgency.Models;
 namespace TravelAgency.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    [Migration("20220329175642_Thirdary")]
-    partial class Thirdary
+    [Migration("20220330161340_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
